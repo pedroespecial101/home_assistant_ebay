@@ -1,6 +1,6 @@
 {
-  "domain": "ebay_beta",
-  "name": "eBay_beta",
+  "domain": "eebay_beta_faultChk",
+  "name": "ebay_beta_faultChk",
   "config_flow": true,
   "documentation": "https://github.com/theonlyrealcolin/home_assistant_ebay",
   "issues": "https://github.com/theonlyrealcolin/home_assistant_ebay/issues",

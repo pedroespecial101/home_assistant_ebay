@@ -38,7 +38,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
         hass,
         _LOGGER,
         # Name of the data. For logging purposes.
-        name="ebay_beta_faultChk",
+        name="ebay",
         update_method=async_update_data,
         # Polling interval. Will only be polled if there are subscribers.
         update_interval=timedelta(minutes=5),

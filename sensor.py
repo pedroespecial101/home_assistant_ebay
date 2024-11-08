@@ -26,8 +26,12 @@ async def async_setup_entry(hass, entry, async_add_entities):
         try:
             await api.session.async_ensure_token_valid(),
             access_token = api.session.token["access_token"]
-            return await get_ebay_data(access_token)
+            data = await get_ebay_data(access_token)
+            hass.states.async_set(f"{DOMAIN}.ebay_api_status", "0")
+            return data
         except Exception as ex:
+            _LOGGER.error(f"Error getting Ebay data: {ex}")
+            hass.states.async_set(f"{DOMAIN}.ebay_api_status", "1")
             raise UpdateFailed(f"Error getting Ebay data: {ex}") from ex
 
     coordinator = DataUpdateCoordinator(
@@ -51,6 +55,18 @@ async def async_setup_entry(hass, entry, async_add_entities):
             )
             for description in EBAY_QUERIES_SENSOR
         ]
+    )
+
+    # Add the API status sensor
+    ebay_entity_list.append(
+        ebayOrders(
+            coordinator,
+            SensorEntityDescription(
+                key="ebay_api_status",
+                name="eBay API Status",
+                icon="mdi:alert",
+            ),
+        )
     )
 
     if ebay_entity_list:

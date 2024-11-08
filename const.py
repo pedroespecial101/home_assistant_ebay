@@ -44,4 +44,10 @@ EBAY_QUERIES_SENSOR: tuple[SensorEntityDescription, ...] = (
         icon="mdi:currency-usd",
         native_unit_of_measurement="USD",
     ),
+    SensorEntityDescription(
+        key="ebay_api_status",
+        name="eBay API Status",
+        icon="mdi:alert",
+        entity_registry_enabled_default=True,
+    ),
 )

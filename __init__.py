@@ -64,7 +64,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     session = config_entry_oauth2_flow.OAuth2Session(hass, entry, implementation)
 
     # If using a requests-based API lib
-    hass.data[DOMAIN][entry.entry_id] = api.ConfigEntryAuth(hass, session)
+    hass.data.setdefault(DOMAIN, {})
+    hass.data[DOMAIN][entry.entry_id] = api
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 

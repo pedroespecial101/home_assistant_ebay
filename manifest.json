@@ -1,19 +1,17 @@
 {
-  "domain": "ebay",
-  "name": "eBay",
+  "domain": "ebay_beta",
+  "name": "eBay Beta",
   "config_flow": true,
-  "documentation": "https://github.com/theonlyrealcolin/home_assistant_ebay",
+  "documentation": "https://your-documentation-url",
   "issues": "https://github.com/theonlyrealcolin/home_assistant_ebay/issues",
   "requirements": [],
   "ssdp": [],
-  "version": "0.1.0",
+  "version": "0.0.1",
   "zeroconf": [],
   "homekit": {},
-  "dependencies": [
-    "http"
-  ],
+  "dependencies": [],
   "codeowners": [
-    "@theonlyrealcolin"
+    "@your-github-username"
   ],
   "iot_class": "cloud_polling"
 }

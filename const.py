@@ -1,7 +1,7 @@
 """Constants for the ebay integration."""
 from homeassistant.components.sensor import SensorEntityDescription
 
-DOMAIN = "ebay"
+DOMAIN = "ebay_beta"
 OAUTH2_AUTHORIZE = "https://auth.ebay.com/oauth2/authorize"
 OAUTH2_TOKEN = "https://api.ebay.com/identity/v1/oauth2/token"
 SCOPES = "https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly"
@@ -9,6 +9,7 @@ UNFULFILLED_ORDERS_URL = "https://api.ebay.com/sell/fulfillment/v1/order?filter=
 SELLER_FUNDS_SUMMARY_URL = "https://apiz.ebay.com/sell/finances/v1/seller_funds_summary"
 
 
+EBAY_QUERIES_SENSOR = "ebay_queries_sensor_beta"
 EBAY_QUERIES_SENSOR: tuple[SensorEntityDescription, ...] = (
     SensorEntityDescription(
         key="ebay_total_unfulfilled_orders",

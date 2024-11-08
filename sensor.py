@@ -18,7 +18,6 @@ _LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
-    # assuming API object stored here by __init__.py
     api = hass.data[DOMAIN][entry.entry_id]
     site_name = entry.data["site_name"]
 

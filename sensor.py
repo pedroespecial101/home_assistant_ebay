@@ -6,7 +6,6 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
 )
 
-
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
@@ -21,6 +20,7 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_entry(hass, entry, async_add_entities):
     # assuming API object stored here by __init__.py
     api = hass.data[DOMAIN][entry.entry_id]
+    site_name = entry.data["site_name"]
 
     async def async_update_data():
         try:
@@ -45,28 +45,33 @@ async def async_setup_entry(hass, entry, async_add_entities):
 
     ebay_entity_list.extend(
         [
-            ebayOrders(
-                coordinator,
-                description,
-            )
-            for description in EBAY_QUERIES_SENSOR
+            EbayOrders(coordinator, site_name),
         ]
     )
 
-    if ebay_entity_list:
-        async_add_entities(ebay_entity_list)
+    async_add_entities(ebay_entity_list, True)
 
 
-class ebayOrders(CoordinatorEntity, SensorEntity):
-    """An entity using CoordinatorEntity."""
+class EbayOrders(CoordinatorEntity, SensorEntity):
+    """Representation of an eBay Orders sensor."""
 
-    def __init__(self, coordinator, description: SensorEntityDescription):
-        """Pass coordinator to CoordinatorEntity."""
+    def __init__(self, coordinator, site_name):
+        """Initialize the sensor."""
         super().__init__(coordinator)
-        self.entity_description = description
-        self._attr_unique_id = f"{description.key}"
+        self._site_name = site_name
+        self._state = None
 
     @property
-    def native_value(self):
-        """Value of sensor."""
-        return self.coordinator.data[self.entity_description.key]
+    def name(self):
+        """Return the name of the sensor."""
+        return f"eBay Orders ({self._site_name})"
+
+    @property
+    def state(self):
+        """Return the state of the sensor."""
+        return self._state
+
+    async def async_update(self):
+        """Fetch new state data for the sensor."""
+        await self.coordinator.async_request_refresh()
+        self._state = self.coordinator.data.get("orders")

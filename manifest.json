@@ -1,6 +1,6 @@
 {
-  "domain": "ebay",
-  "name": "eBay",
+  "domain": "ebay_beta",
+  "name": "eBay Beta",
   "config_flow": true,
   "documentation": "https://github.com/theonlyrealcolin/home_assistant_ebay",
   "issues": "https://github.com/theonlyrealcolin/home_assistant_ebay/issues",

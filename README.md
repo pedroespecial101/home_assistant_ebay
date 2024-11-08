@@ -1,7 +1,11 @@
-# Home Assistant eBay Seller Integration
+# Home Assistant eBay Seller Integration (Beta)
 
+This is the beta version of the eBay integration that supports multiple accounts. It can be installed alongside your existing eBay integration.
 
-### Adds the following sensors
+### Multi-Account Support
+This beta version supports multiple eBay seller accounts! You can add multiple accounts through the Home Assistant UI, and each account's sensors will be prefixed with the account name you provide during setup.
+
+### Adds the following sensors (per account)
 * Current orders needing to be shipped out
 * Current orders needing to be shipped out <strong>today</strong>
 * Available Funds
@@ -11,7 +15,8 @@
 
 ### Setup
 
-- #### Add this integration to to your config/custom_components folder and restart your Home Assistant
+- #### Add this integration to to your config/custom_components/ebay_beta folder and restart your Home Assistant
+  Note: Make sure to install this in a folder named `ebay_beta` to run alongside your existing integration.
 
 - #### Follow the steps below to setup an eBay developer account.
 1. Sign up for eBay developer account at [https://developer.ebay.com/signin](https://developer.ebay.com/signin)
@@ -23,7 +28,7 @@
 7. Go to User Tokens (eBay Sign-in)
 8. Select the "Get Token from eBay Via Your Application"
 9. Click on Add eBay Redirect URL
-10. Add whatever display Title you would like. Example: "Home Assistant"
+10. Add whatever display Title you would like. Example: "Home Assistant Beta"
 11. Add whatever privacy policy url you would like. (Not sure if this is actually required, but you could put home assistant's privacy policy url if needed)
 12. In the "Your auth accepted URL" box you'll need to put the callback url for your home assistan in this format "https://{home assistant url}/auth/external/callback". (Example: https://blahblahblahblah.duckdns.org/auth/external/callback)
 13. You can leave the "Your auth declined" blank.
@@ -34,7 +39,7 @@
 - #### Add the following entry within configuration.yaml using the things you saved from the previous section and then restart your home assistant.
 
 ```yaml
-ebay:
+ebay_beta:
   client_id: blahblahblah-PRD-sdlfkjsdf-2lkjsdfl #Saved from step 3
   client_secret: PRD-sdflkjsdf-sdfk-2345-al34-sd12 #Saved from step 4
   redirect_uri: blahblahblah-blahbla-blahbla-sdkljsd #Saved from step 16
@@ -43,11 +48,19 @@ ebay:
 - #### Add the integration within the Home Assistant integration page.
 1. Go to Configuration
 2. Devices & Services
-3. Add the ebay integration.
-4. It should redirect you to log into your eBay account.
-5. Select I Agree
+3. Add the "eBay Beta" integration
+4. Enter a name for this eBay account (e.g., "Main Store", "Secondary Store")
+5. It will redirect you to log into your eBay account
+6. Select I Agree
+7. Repeat steps 3-6 for each additional eBay account you want to add
 
 - #### You should now see the sensors within Home Assistant.
+Each account's sensors will be prefixed with the account name you provided during setup. For example:
+- Main Store eBay Beta Total Unfulfilled Orders
+- Secondary Store eBay Beta Total Unfulfilled Orders
+
+### Running Alongside Existing Integration
+This beta version is designed to run alongside your existing eBay integration. The sensors will be clearly marked with "Beta" in their names to distinguish them from the original integration's sensors. You can safely test this version without affecting your existing setup.
 
 
 ##### Marketplace Account Deletion Warning

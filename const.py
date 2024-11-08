@@ -1,7 +1,7 @@
 """Constants for the ebay integration."""
 from homeassistant.components.sensor import SensorEntityDescription
 
-DOMAIN = "ebay"
+DOMAIN = "ebay_beta"
 OAUTH2_AUTHORIZE = "https://auth.ebay.com/oauth2/authorize"
 OAUTH2_TOKEN = "https://api.ebay.com/identity/v1/oauth2/token"
 SCOPES = "https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly"
@@ -11,36 +11,36 @@ SELLER_FUNDS_SUMMARY_URL = "https://apiz.ebay.com/sell/finances/v1/seller_funds_
 
 EBAY_QUERIES_SENSOR: tuple[SensorEntityDescription, ...] = (
     SensorEntityDescription(
-        key="ebay_total_unfulfilled_orders",
-        name="eBay Total Unfulfilled Orders",
+        key="ebay_beta_total_unfulfilled_orders",
+        name="eBay Beta Total Unfulfilled Orders",
         icon="mdi:package-variant-closed",
     ),
     SensorEntityDescription(
-        key="ebay_orders_due_today",
-        name="eBay Orders Due Today",
+        key="ebay_beta_orders_due_today",
+        name="eBay Beta Orders Due Today",
         icon="mdi:package-variant-closed",
     ),
     SensorEntityDescription(
-        key="ebay_available_funds",
-        name="eBay Available Funds",
+        key="ebay_beta_available_funds",
+        name="eBay Beta Available Funds",
         icon="mdi:currency-usd",
         native_unit_of_measurement="USD",
     ),
     SensorEntityDescription(
-        key="ebay_funds_on_hold",
-        name="eBay Funds on Hold",
+        key="ebay_beta_funds_on_hold",
+        name="eBay Beta Funds on Hold",
         icon="mdi:currency-usd",
         native_unit_of_measurement="USD",
     ),
     SensorEntityDescription(
-        key="ebay_processing_funds",
-        name="eBay Funds Processing",
+        key="ebay_beta_processing_funds",
+        name="eBay Beta Funds Processing",
         icon="mdi:currency-usd",
         native_unit_of_measurement="USD",
     ),
     SensorEntityDescription(
-        key="ebay_total_funds",
-        name="eBay Total Funds",
+        key="ebay_beta_total_funds",
+        name="eBay Beta Total Funds",
         icon="mdi:currency-usd",
         native_unit_of_measurement="USD",
     ),

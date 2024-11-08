@@ -21,6 +21,7 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_entry(hass, entry, async_add_entities):
     # assuming API object stored here by __init__.py
     api = hass.data[DOMAIN][entry.entry_id]
+    account_name = entry.data.get("account_name", "Primary")
 
     async def async_update_data():
         try:
@@ -34,7 +35,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
         hass,
         _LOGGER,
         # Name of the data. For logging purposes.
-        name="ebay",
+        name=f"ebay_beta_{account_name}",
         update_method=async_update_data,
         # Polling interval. Will only be polled if there are subscribers.
         update_interval=timedelta(minutes=5),
@@ -48,6 +49,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
             ebayOrders(
                 coordinator,
                 description,
+                entry,
             )
             for description in EBAY_QUERIES_SENSOR
         ]
@@ -60,11 +62,18 @@ async def async_setup_entry(hass, entry, async_add_entities):
 class ebayOrders(CoordinatorEntity, SensorEntity):
     """An entity using CoordinatorEntity."""
 
-    def __init__(self, coordinator, description: SensorEntityDescription):
+    def __init__(self, coordinator, description: SensorEntityDescription, entry):
         """Pass coordinator to CoordinatorEntity."""
         super().__init__(coordinator)
         self.entity_description = description
-        self._attr_unique_id = f"{description.key}"
+        self.entry = entry
+        account_name = entry.data.get("account_name", "Primary")
+        
+        # Create unique ID using entry ID to ensure uniqueness across accounts
+        self._attr_unique_id = f"ebay_beta_{entry.entry_id}_{description.key}"
+        
+        # Prefix the name with the account name
+        self._attr_name = f"{account_name} {description.name}"
 
     @property
     def native_value(self):

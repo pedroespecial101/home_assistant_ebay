@@ -36,23 +36,29 @@ This beta version supports multiple eBay seller accounts! You can add multiple a
 15. After saving make sure the OAuth Enabled has a checkmark next the display title you just created.
 16. Save the "RuName (eBay Redirect URL name)" for later.
 
-- #### Add the following entry within configuration.yaml using the things you saved from the previous section and then restart your home assistant.
-
+- #### Add the following entries to your secrets.yaml file:
 ```yaml
-ebay_beta:
-  client_id: blahblahblah-PRD-sdlfkjsdf-2lkjsdfl #Saved from step 3
-  client_secret: PRD-sdflkjsdf-sdfk-2345-al34-sd12 #Saved from step 4
-  redirect_uri: blahblahblah-blahbla-blahbla-sdkljsd #Saved from step 16
+ebay_beta_client_id: "Your-Client-ID-Here"  # From step 3
+ebay_beta_client_secret: "Your-Client-Secret-Here"  # From step 4
+```
+
+- #### Add the following entry within configuration.yaml and then restart your home assistant:
+```yaml
+application_credentials:
+  ebay_beta:
+    client_id: !secret ebay_beta_client_id
+    client_secret: !secret ebay_beta_client_secret
 ```
 
 - #### Add the integration within the Home Assistant integration page.
 1. Go to Configuration
 2. Devices & Services
-3. Add the "eBay Beta" integration
-4. Enter a name for this eBay account (e.g., "Main Store", "Secondary Store")
-5. It will redirect you to log into your eBay account
-6. Select I Agree
-7. Repeat steps 3-6 for each additional eBay account you want to add
+3. Add Integration (+ button)
+4. Search for "eBay Beta"
+5. Enter a name for this eBay account (e.g., "Main Store", "Secondary Store")
+6. It will redirect you to log into your eBay account
+7. Select I Agree
+8. Repeat steps 3-7 for each additional eBay account you want to add
 
 - #### You should now see the sensors within Home Assistant.
 Each account's sensors will be prefixed with the account name you provided during setup. For example:

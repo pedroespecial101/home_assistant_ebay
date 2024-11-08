@@ -21,6 +21,9 @@ class OAuth2FlowHandler(
 
     DOMAIN = DOMAIN
     CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
+    VERSION = 1
+
+    account_name = None
 
     @property
     def logger(self) -> logging.Logger:
@@ -36,12 +39,17 @@ class OAuth2FlowHandler(
                     vol.Required("account_name"): str,
                 })
             )
-        
-        return await super().async_step_user(user_input)
+
+        self.account_name = user_input["account_name"]
+        return await self.async_step_pick_implementation()
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an entry for the flow."""
-        data["account_name"] = self.flow_impl.get("account_name", "Primary")
+        if self.account_name:
+            data["account_name"] = self.account_name
+        else:
+            data["account_name"] = "Primary"
+
         return self.async_create_entry(
             title=f"eBay Beta ({data['account_name']})", 
             data=data

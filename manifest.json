@@ -10,10 +10,19 @@
   "zeroconf": [],
   "homekit": {},
   "dependencies": [
-    "http"
+    "http",
+    "application_credentials"
   ],
   "codeowners": [
     "@theonlyrealcolin"
   ],
-  "iot_class": "cloud_polling"
+  "iot_class": "cloud_polling",
+  "auth_providers": [
+    {
+      "type": "oauth2",
+      "description": "eBay OAuth2",
+      "client_id": "!secret ebay_beta_client_id",
+      "client_secret": "!secret ebay_beta_client_secret"
+    }
+  ]
 }

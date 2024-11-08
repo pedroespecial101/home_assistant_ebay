@@ -1,7 +1,7 @@
 """Constants for the ebay integration."""
 from homeassistant.components.sensor import SensorEntityDescription
 
-DOMAIN = "ebay"
+DOMAIN = "ebay_beta"
 OAUTH2_AUTHORIZE = "https://auth.ebay.com/oauth2/authorize"
 OAUTH2_TOKEN = "https://api.ebay.com/identity/v1/oauth2/token"
 SCOPES = "https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly"
